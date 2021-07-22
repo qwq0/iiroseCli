@@ -16,10 +16,10 @@ function save_account()
         return o != null;
     })));
 }
+var ws = [];
+window.debugMode = false;
 try
 {
-    var ws = [];
-    window.debugMode = false;
     forEach(account, function (i, o)
     {
         account_pageEle_add_acc(i, o);
@@ -31,5 +31,6 @@ try
 }
 catch (err)
 {
+    console.error(err);
     window.localStorage.removeItem("account");
 }

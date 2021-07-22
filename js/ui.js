@@ -62,7 +62,7 @@ function addPage(title, pageEle)
         }
         page_now = page_id;
         pageEle.style.display = "";
-        tm_bt.style.backgroundColor = "rgba(200, 200, 255, 0.15)";
+        tm_bt.style.backgroundColor = "rgba(200, 200, 255, 0.3)";
     });
     tm_box.appendChild(tm_bt);
     page_box.appendChild(pageEle);
