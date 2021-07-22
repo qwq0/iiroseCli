@@ -1,4 +1,4 @@
-function protocol(sendMsg)
+function protocol(sendMsg, pageEle)
 {
     return function (data)
     {
@@ -7,12 +7,18 @@ function protocol(sendMsg)
         if (data.slice(0, 3) == '%*"')
         {
             sendMsg("");
-            if (data.slice(0, 4) == '%*"*')
+            if (data[3] == '*')
             {
                 var obj = cutString(data.slice(4), "'");
             }
-            if (data.slice(0, 4) == '%*"s')
+            if (data[3] == 's')
             {
+                var a = data.slice(4).split('>');
+                pageEle.appendChild(document.createTextNode("房间错误 请修改为: " + a[0] + " (" + a[1] + ")"));
+            }
+            if (data[3] == '1' || data[3] == '2')
+            {
+                pageEle.appendChild(document.createTextNode("登录失败 请检查账号密码"));
             }
             return;
         }
@@ -798,7 +804,20 @@ function protocol(sendMsg)
                 break;
             default:
                 if (data[0] >= '0' && data[0] <= '9')
-                    console.log("rMsg", data.split(">"));
+                {
+                    if (window.debugMode)
+                        console.log("rMsg", data.split(">"));
+                    var a = data.split(">");
+                    var e = document.createElement("div");
+                    e.style.left = "0";
+                    e.style.right = "0";
+                    e.style.padding = "5px";
+                    e.style.marginTop = "5px";
+                    e.style.border = "2px solid";
+                    e.style.borderColor = "#" + a[5];
+                    e.innerText = a[2] + " : " + a[3];
+                    pageEle.appendChild(e);
+                }
         }
     }
 }

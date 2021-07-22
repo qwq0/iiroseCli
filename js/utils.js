@@ -11,4 +11,9 @@ function forEach(o, callback)
         if (o[i] != undefined && callback(i, o[i]))
             return true;
     return false;
-};
+}
+function prompt_d(t, o)
+{
+    var i = prompt(t, o);
+    return (i != null ? i : o)
+}

@@ -1,8 +1,8 @@
-function addws(account)
+function addws(account, pageEle)
 {
     var ws = new WebSocket("wss://iirose.com:8778/");
     ws.binaryType = "arraybuffer";
-    var onMsg = protocol(sendMsg);
+    var onMsg = protocol(sendMsg, pageEle);
 
     ws.addEventListener("message", function (ev)
     {
@@ -33,6 +33,7 @@ function addws(account)
     ws.addEventListener("open", function ()
     {
         console.log("ws opened");
+        pageEle.appendChild(document.createElement("div")).innerText = "已连接到服务器";
         ws.send('*' + JSON.stringify({
             "r": account.room, // room id
             "n": account.name, // user id
@@ -52,6 +53,7 @@ function addws(account)
     ws.addEventListener("close", function ()
     {
         console.log("ws closed");
+        pageEle.appendChild(document.createElement("div")).innerText = "已从服务器断开";
     });
 
     return ws;
