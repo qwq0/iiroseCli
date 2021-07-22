@@ -16,23 +16,20 @@ function save_account()
         return o != null;
     })));
 }
-window.addEventListener("load", function ()
+try
 {
-    try
+    var ws = [];
+    window.debugMode = false;
+    forEach(account, function (i, o)
     {
-        var ws = [];
-        window.debugMode = false;
-        forEach(account, function (i, o)
-        {
-            account_pageEle_add_acc(i, o);
+        account_pageEle_add_acc(i, o);
 
-            var pageEle = addPage(o.name);
-            pageEle.style.padding = "10px";
-            addws(o, pageEle);
-        });
-    }
-    catch (err)
-    {
-        window.localStorage.removeItem("account");
-    }
-});
+        var pageEle = addPage(o.name);
+        pageEle.style.padding = "10px";
+        addws(o, pageEle);
+    });
+}
+catch (err)
+{
+    window.localStorage.removeItem("account");
+}
