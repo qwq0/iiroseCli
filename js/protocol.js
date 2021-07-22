@@ -14,7 +14,7 @@ function protocol(sendMsg, pageEle)
             if (data[3] == 's')
             {
                 var a = data.slice(4).split('>');
-                pageEle.appendChild(document.createTextNode("房间错误 请修改为: " + a[0] + " (" + a[1] + ")"));
+                pageEle.appendChild(document.createTextNode("房间错误 此账号在房间: " + a[1] +" 请修改为: " + a[0]));
             }
             if (data[3] == '1' || data[3] == '2')
             {
