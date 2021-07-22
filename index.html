@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>iirose Client</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <style>
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        div.box {
+            position: absolute;
+            box-sizing: border-box;
+            top: 0px;
+            left: 0px;
+            display: inline-block;
+        }
+
+        div.flBox {
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main_box" class="box"
+        style="height:calc(100% + 50px);width:calc(100% + 50px);background-color:rgba(5, 5, 5, 1);color:rgba(255, 255, 255, 0.8);transition:top 260ms,left 260ms;">
+
+        <div id="lt_bt" class="box flBox"
+            style="height:50px;width:50px;border-right:1px solid rgba(255, 255, 255, 0.5);border-bottom:1px solid rgba(255, 255, 255, 0.5);">
+            收起
+        </div>
+
+        <div class="box"
+            style="height:calc(100% - 50px);width:50px;top:50px;border-right:1px solid rgba(255, 255, 255, 0.8);">
+            <div class="flBox" style="height:50px;width:100%;border-bottom:1px solid rgba(255, 255, 255, 0.5);">
+                账号
+            </div>
+            <div></div>
+        </div>
+
+        <div class="box"
+            style="height:50px;width:calc(100% - 50px);left:50px;border-bottom: 1px solid rgba(255, 255, 255, 0.8);">
+            <div class="flBox" style="height:50px;width:200px;border-right:1px solid rgba(255, 255, 255, 0.5);">
+                登录页
+            </div>
+        </div>
+
+        <div class="box" style="height:100%;width:100%;top:50px;left:50px;">
+        </div>
+    </div>
+
+    <script src=" ./js/md5.js"></script>
+    <script src="./js/pako.min.js"></script>
+    <script src="./js/utils.js"></script>
+    <script src="./js/ui.js"></script>
+    <script src="./js/protocol.js"></script>
+    <script src="./js/ws.js"></script>
+    <script src="./js/main.js"></script>
+</body>
+
+</html>
