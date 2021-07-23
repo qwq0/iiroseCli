@@ -1,4 +1,9 @@
-function addws(account, pageEle)
+import { MD5_32Char_lowerCase } from "./md5.js";
+import "./pako.min.js";
+import { protocol } from "./protocol.js";
+var pako = window.pako;
+
+export function addws(account, pageEle)
 {
     var ws = new WebSocket("wss://iirose.com:8778/");
     ws.binaryType = "arraybuffer";

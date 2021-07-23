@@ -1,4 +1,6 @@
-function protocol(sendMsg, pageEle)
+import { cutString } from "./utils";
+
+export function protocol(sendMsg, pageEle)
 {
     return function (data)
     {

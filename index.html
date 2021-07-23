@@ -65,7 +65,8 @@
             style="height:50px;width:calc(100% - 50px);left:50px;border-bottom: 1px solid rgba(255, 255, 255, 0.7);overflow-x:auto;overflow-y:hidden;white-space:nowrap;">
         </div>
 
-        <div id="page_box" class="box" style="height:calc(100% - 50px);width:calc(100% - 50px);top:50px;left:50px;user-select:text;">
+        <div id="page_box" class="box"
+            style="height:calc(100% - 50px);width:calc(100% - 50px);top:50px;left:50px;user-select:text;">
         </div>
 
         <div id="lb_bt" class="box flBox"
@@ -74,7 +75,14 @@
         </div>
     </div>
 
-    <script src="./js/loader.js"></script>
+    <script>
+        (function (d)
+        {
+            var s = d.createElement("script");
+            s.src = "./js/dist.js" + "?" + Math.random();
+            d.body.appendChild(s);
+        })(document);
+    </script>
 </body>
 
 </html>

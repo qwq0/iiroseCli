@@ -1,4 +1,7 @@
-function addButtonDiv(text, callback, style)
+import { account, save_account } from "./account.js";
+import { prompt_d } from "./utils.js";
+
+export function addButtonDiv(text, callback, style)
 {
     var e = document.createElement("div");
     e.innerText = text;
@@ -28,7 +31,7 @@ var page_now = -1;
 // var page_num = Number(window.localStorage.getItem("page_num"));
 var page_num = 0;
 var page_list = [];
-function addPage(title, pageEle)
+export function addPage(title, pageEle)
 {
     if (!title)
         title = "未命名";
@@ -72,13 +75,13 @@ function addPage(title, pageEle)
 var lm_bt_account = document.getElementById("lm_bt_account");
 
 var account_pageEle = document.createElement("div");
+account_pageEle.style.padding = "30px";
 lm_bt_account.addEventListener("click", function ()
 {
-    pageEle = addPage("账号管理", account_pageEle);
-    pageEle.style.padding = "30px";
+    addPage("账号管理", account_pageEle);
 });
 account_pageEle.style.padding = "25px";
-function account_pageEle_add_acc(i, o)
+export function account_pageEle_add_acc(i, o)
 {
     var acc_info = account_pageEle.appendChild(document.createElement("div"));
     acc_info.style.border = "2px solid rgb(255,255,255,0.5)";

@@ -1,21 +1,10 @@
-var account = null;
-try
-{
-    account = JSON.parse(window.localStorage.getItem("account"));
-    if (!Array.isArray(account))
-        throw "localStorage: account is not array";
-}
-catch (err)
-{
-    account = [];
-}
-function save_account()
-{
-    window.localStorage.setItem("account", JSON.stringify(account.filter(function (o)
-    {
-        return o != null;
-    })));
-}
+import { forEach } from "./utils.js";
+import { account_pageEle_add_acc, addPage } from "./ui.js"
+import { account } from "./account.js";
+import { addws } from "./ws.js";
+
+
+
 var ws = [];
 window.debugMode = false;
 try
