@@ -34,44 +34,46 @@
             justify-content: center;
         }
 
-        #tm_box::-webkit-scrollbar {
+        div::-webkit-scrollbar {
             display: none;
         }
     </style>
 </head>
 
 <body>
-    <div id="main_box" class="box"
-        style="height:calc(100% + 50px);width:calc(100% + 50px);background-color:rgba(5, 5, 5, 1);color:rgba(255, 255, 255, 0.8);transition:top 210ms,left 210ms;user-select:none;">
+    <div style="position:fixed;top:0px;left:0px;height:100%;width:100%;">
+        <div id="main_box" class="box"
+            style="height:calc(100% + 50px);width:calc(100% + 50px);background-color:rgba(5,5,5,1);color:rgba(255,255,255,0.8);transition:top 210ms,left 210ms;user-select:none;">
 
-        <div id="qwq_bt" class="box flBox"
-            style="height:50px;width:50px;border-right:1px solid rgba(255, 255, 255, 0.5);border-bottom:1px solid rgba(255, 255, 255, 0.5);">
-            QwQ/
-        </div>
-
-        <div id="lm_box" class="box"
-            style="height:calc(100% - 50px);width:50px;top:50px;border-right:1px solid rgba(255, 255, 255, 0.7);">
-            <div id="lm_bt_account" class="flBox"
-                style="height:50px;width:100%;border-bottom:1px solid rgba(255, 255, 255, 0.5);">
-                账号
+            <div id="qwq_bt" class="box flBox"
+                style="height:50px;width:50px;border-right:1px solid rgba(255, 255, 255, 0.5);border-bottom:1px solid rgba(255,255,255,0.5);">
+                QwQ/
             </div>
-            <div id="mlb_bt" class="box flBox"
-                style="height:50px;width:50px;top:calc(100% - 100px);border-top:1px solid rgba(255, 255, 255, 0.5);">
-                收起
+
+            <div id="lm_box" class="box"
+                style="height:calc(100% - 50px);width:50px;top:50px;border-right:1px solid rgba(255,255,255,0.7);">
+                <div id="lm_bt_account" class="flBox"
+                    style="height:50px;width:100%;border-bottom:1px solid rgba(255, 255, 255, 0.5);">
+                    账号
+                </div>
+                <div id="mlb_bt" class="box flBox"
+                    style="height:50px;width:50px;top:calc(100% - 100px);border-top:1px solid rgba(255,255,255,0.5);">
+                    收起
+                </div>
             </div>
-        </div>
 
-        <div id="tm_box" class="box"
-            style="height:50px;width:calc(100% - 50px);left:50px;border-bottom: 1px solid rgba(255, 255, 255, 0.7);overflow-x:auto;overflow-y:hidden;white-space:nowrap;">
-        </div>
+            <div id="tm_box" class="box"
+                style="height:50px;width:calc(100% - 50px);left:50px;border-bottom:1px solid rgba(255,255,255,0.7);overflow-x:auto;overflow-y:hidden;white-space:nowrap;">
+            </div>
 
-        <div id="page_box" class="box"
-            style="height:calc(100% - 50px);width:calc(100% - 50px);top:50px;left:50px;user-select:text;">
-        </div>
+            <div id="page_box" class="box"
+                style="height:calc(100% - 50px);width:calc(100% - 50px);top:50px;left:50px;user-select:text;">
+            </div>
 
-        <div id="lb_bt" class="box flBox"
-            style="height:50px;width:50px;left:50px;top:calc(100% - 50px);border-top:1px solid rgba(255, 255, 255, 0.5);border-right:1px solid rgba(255, 255, 255, 0.5);">
-            菜单
+            <div id="lb_bt" class="box flBox"
+                style="height:50px;width:50px;left:50px;top:calc(100% - 50px);border-top:1px solid rgba(255,255,255,0.5);border-right:1px solid rgba(255,255,255,0.5);background-color:rgba(5,5,5,0.6)">
+                菜单
+            </div>
         </div>
     </div>
 

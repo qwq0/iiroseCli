@@ -1,5 +1,5 @@
 import { forEach } from "./utils.js";
-import { account_pageEle_add_acc, addPage } from "./ui.js"
+import { account_pageEle_add_acc, addPage, setUserPage } from "./ui.js"
 import { account } from "./account.js";
 import { addws } from "./ws.js";
 
@@ -14,8 +14,9 @@ try
         account_pageEle_add_acc(i, o);
 
         var pageEle = addPage(o.name);
-        pageEle.style.padding = "10px";
-        addws(o, pageEle);
+        var msg_box = document.createElement("div");
+        var ct = addws(o, pageEle.appendChild(msg_box));
+        setUserPage(pageEle, msg_box, ct.sendMsg);
     });
 }
 catch (err)

@@ -12,6 +12,15 @@ export function forEach(o, callback)
             return true;
     return false;
 }
+export function forEachRev(o, callback)
+{
+    if (!o)
+        return false;
+    for (var i = o.length - 1; i >= 0; i--)
+        if (o[i] != undefined && callback(i, o[i]))
+            return true;
+    return false;
+}
 export function prompt_d(t, o)
 {
     var i = prompt(t, o);

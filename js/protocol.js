@@ -1,4 +1,4 @@
-import { cutString } from "./utils";
+import { cutString, forEach, forEachRev } from "./utils";
 
 export function protocol(sendMsg, pageEle)
 {
@@ -16,7 +16,7 @@ export function protocol(sendMsg, pageEle)
             if (data[3] == 's')
             {
                 var a = data.slice(4).split('>');
-                pageEle.appendChild(document.createTextNode("房间错误 此账号在房间: " + a[1] +" 请修改为: " + a[0]));
+                pageEle.appendChild(document.createTextNode("房间错误 此账号在房间: " + a[1] + " 请修改为: " + a[0]));
             }
             if (data[3] == '1' || data[3] == '2')
             {
@@ -807,18 +807,21 @@ export function protocol(sendMsg, pageEle)
             default:
                 if (data[0] >= '0' && data[0] <= '9')
                 {
-                    if (window.debugMode)
-                        console.log("rMsg", data.split(">"));
-                    var a = data.split(">");
-                    var e = document.createElement("div");
-                    e.style.left = "0";
-                    e.style.right = "0";
-                    e.style.padding = "5px";
-                    e.style.marginTop = "5px";
-                    e.style.border = "2px solid";
-                    e.style.borderColor = "#" + a[5];
-                    e.innerText = a[2] + " : " + a[3];
-                    pageEle.appendChild(e);
+                    forEachRev(data.split("<"), function (i, m)
+                    {
+                        if (window.debugMode)
+                            console.log("rMsg", m.split(">"));
+                        var a = m.split(">");
+                        var e = document.createElement("div");
+                        e.style.left = "0";
+                        e.style.right = "0";
+                        e.style.padding = "5px";
+                        e.style.marginTop = "5px";
+                        e.style.border = "2px solid";
+                        e.style.borderColor = "#" + a[5];
+                        e.innerText = a[2] + " : " + a[3];
+                        pageEle.appendChild(e);
+                    });
                 }
         }
     }

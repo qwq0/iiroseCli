@@ -61,5 +61,8 @@ export function addws(account, pageEle)
         pageEle.appendChild(document.createElement("div")).innerText = "已从服务器断开";
     });
 
-    return ws;
+    return {
+        sendMsg: sendMsg,
+        ws: ws
+    };
 }

@@ -15,6 +15,15 @@
                 return true;
         return false;
     }
+    function forEachRev(o, callback)
+    {
+        if (!o)
+            return false;
+        for (var i = o.length - 1; i >= 0; i--)
+            if (o[i] != undefined && callback(i, o[i]))
+                return true;
+        return false;
+    }
     function prompt_d(t, o)
     {
         var i = prompt(t, o);
@@ -83,7 +92,7 @@
         tm_bt.className = "flBox";
         tm_bt.style.borderRight = "1px solid rgba(255, 255, 255, 0.5)";
         tm_bt.style.height = "100%";
-        tm_bt.style.width = "200px";
+        tm_bt.style.width = "160px";
 
         if (pageEle == undefined)
             pageEle = document.createElement("div");
@@ -117,6 +126,8 @@
 
     var account_pageEle = document.createElement("div");
     account_pageEle.style.padding = "30px";
+    account_pageEle.style.overflowX = "hidden";
+    account_pageEle.style.overflowY = "auto";
     lm_bt_account.addEventListener("click", function ()
     {
         addPage("账号管理", account_pageEle);
@@ -163,6 +174,52 @@
         account_pageEle_add_acc(account.length - 1, o);
         save_account();
     }));
+
+    function setUserPage(pageEle, msg_box, sendMsg)
+    {
+        msg_box.className = "box";
+        msg_box.style.height = "100%";
+        msg_box.style.width = "100%";
+        msg_box.style.padding = "10px";
+        msg_box.style.paddingBottom = "75px";
+        msg_box.style.overflowX = "hidden";
+        msg_box.style.overflowY = "auto";
+
+        var msg_input = document.createElement("div");
+        msg_input.className = "box";
+        msg_input.style.top = "calc(100% - 50px)";
+        msg_input.style.left = "50px";
+        msg_input.style.height = "50px";
+        msg_input.style.width = "calc(100% - 100px)";
+        msg_input.style.borderTop = "1px solid rgba(255,255,255,0.5)";
+        msg_input.style.backgroundColor = "rgba(5,5,5,0.6)";
+        msg_input.style.lineHeight = "50px";
+        msg_input.style.outline = "none";
+        msg_input.contentEditable = "true";
+        pageEle.appendChild(msg_input);
+        var msg_send = document.createElement("div");
+        msg_send.className = "box flBox";
+        msg_send.style.top = "calc(100% - 50px)";
+        msg_send.style.left = "calc(100% - 50px)";
+        msg_send.style.height = "50px";
+        msg_send.style.width = "50px";
+        msg_send.style.borderTop = "1px solid rgba(255,255,255,0.5)";
+        msg_send.style.borderLeft = "1px solid rgba(255,255,255,0.5)";
+        msg_send.style.backgroundColor = "rgba(5,5,5,0.6)";
+        msg_send.innerText = "发送";
+        msg_send.addEventListener("click", function ()
+        {
+            var text = msg_input.innerText;
+            msg_input.innerText = "";
+            if (text != "")
+                sendMsg(JSON.stringify({
+                    "m": text,
+                    "mc": "000000",
+                    "i": Math.floor(Math.random() * (1 << 30)).toString()
+                }));
+        });
+        pageEle.appendChild(msg_send);
+    }
 
     var bit_rol = (num, cnt) => (num << cnt) | (num >>> (32 - cnt));
     var md5_cmn = (q, a, b, x, s, t) => safe_add(bit_rol(safe_add(safe_add(a, q), safe_add(x, t)), s), b);
@@ -302,7 +359,7 @@
                 if (data[3] == 's')
                 {
                     var a = data.slice(4).split('>');
-                    pageEle.appendChild(document.createTextNode("房间错误 此账号在房间: " + a[1] +" 请修改为: " + a[0]));
+                    pageEle.appendChild(document.createTextNode("房间错误 此账号在房间: " + a[1] + " 请修改为: " + a[0]));
                 }
                 if (data[3] == '1' || data[3] == '2')
                 {
@@ -1093,18 +1150,21 @@
                 default:
                     if (data[0] >= '0' && data[0] <= '9')
                     {
-                        if (window.debugMode)
-                            console.log("rMsg", data.split(">"));
-                        var a = data.split(">");
-                        var e = document.createElement("div");
-                        e.style.left = "0";
-                        e.style.right = "0";
-                        e.style.padding = "5px";
-                        e.style.marginTop = "5px";
-                        e.style.border = "2px solid";
-                        e.style.borderColor = "#" + a[5];
-                        e.innerText = a[2] + " : " + a[3];
-                        pageEle.appendChild(e);
+                        forEachRev(data.split("<"), function (i, m)
+                        {
+                            if (window.debugMode)
+                                console.log("rMsg", m.split(">"));
+                            var a = m.split(">");
+                            var e = document.createElement("div");
+                            e.style.left = "0";
+                            e.style.right = "0";
+                            e.style.padding = "5px";
+                            e.style.marginTop = "5px";
+                            e.style.border = "2px solid";
+                            e.style.borderColor = "#" + a[5];
+                            e.innerText = a[2] + " : " + a[3];
+                            pageEle.appendChild(e);
+                        });
                     }
             }
         }
@@ -1170,7 +1230,10 @@
             pageEle.appendChild(document.createElement("div")).innerText = "已从服务器断开";
         });
 
-        return ws;
+        return {
+            sendMsg: sendMsg,
+            ws: ws
+        };
     }
 
     window.debugMode = false;
@@ -1181,8 +1244,9 @@
             account_pageEle_add_acc(i, o);
 
             var pageEle = addPage(o.name);
-            pageEle.style.padding = "10px";
-            addws(o, pageEle);
+            var msg_box = document.createElement("div");
+            var ct = addws(o, pageEle.appendChild(msg_box));
+            setUserPage(pageEle, msg_box, ct.sendMsg);
         });
     }
     catch (err)
