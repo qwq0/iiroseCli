@@ -147,19 +147,22 @@
                 acc_info.remove();
             }
         }));
-        acc_info.appendChild(addButtonDiv("用户名 : " + o.name, function ()
+        acc_info.appendChild(addButtonDiv("用户名 : " + o.name, function (e)
         {
             o.name = prompt_d("修改用户名为:", o.name);
+            e.currentTarget.innerText = "用户名 : " + o.name;
             save_account();
         }, "margin-top:10px"));
-        acc_info.appendChild(addButtonDiv("密码 : " + o.password, function ()
+        acc_info.appendChild(addButtonDiv("密码 : " + o.password, function (e)
         {
             o.password = prompt_d("修改密码为:\n请注意这不是修改账号密码 而是修改登录时使用的密码", o.password);
+            e.currentTarget.innerText = "密码 : " + o.password;
             save_account();
         }, "margin-top:10px"));
-        acc_info.appendChild(addButtonDiv("房间id : " + o.room, function ()
+        acc_info.appendChild(addButtonDiv("房间id : " + o.room, function (e)
         {
             o.room = prompt_d("房间id:\n请注意房间的id不是房间名", o.room);
+            e.currentTarget.innerText = "房间id : " + o.room;
             save_account();
         }, "margin-top:10px"));
     }
