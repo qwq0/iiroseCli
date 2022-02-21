@@ -5,7 +5,7 @@ var pako = window.pako;
 
 export function addws(account, pageEle)
 {
-    var ws = new WebSocket("wss://iirose.com:8778/");
+    var ws = new WebSocket("wss://m1.iirose.com:8778/");
     ws.binaryType = "arraybuffer";
     var onMsg = protocol(sendMsg, pageEle);
 
