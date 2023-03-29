@@ -6,7 +6,7 @@ import { addws } from "./ws.js";
 
 
 var ws = [];
-window.debugMode = false;
+window.debugMode = (window.location.hash == "#debugMode");
 try
 {
     forEach(account, function (i, o)
