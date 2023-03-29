@@ -348,6 +348,8 @@
 
     function protocol(sendMsg, pageEle)
     {
+        let login = false;
+
         return function (data)
         {
             if (window.debugMode)
@@ -357,16 +359,20 @@
                 sendMsg("s");
                 if (data[3] == '*')
                 {
+                    login = true;
                     cutString(data.slice(4), "'");
                 }
-                if (data[3] == 's')
+                if (!login)
                 {
-                    var a = data.slice(4).split('>');
-                    pageEle.appendChild(document.createTextNode("房间错误 此账号在房间: " + a[1] + " 请修改为: " + a[0]));
-                }
-                if (data[3] == '1' || data[3] == '2')
-                {
-                    pageEle.appendChild(document.createTextNode("登录失败 请检查账号密码"));
+                    if (data[3] == 's')
+                    {
+                        var a = data.slice(4).split('>');
+                        pageEle.appendChild(document.createTextNode("房间错误 此账号在房间: " + a[1] + " 请修改为: " + a[0]));
+                    }
+                    if (data[3] == '1' || data[3] == '2')
+                    {
+                        pageEle.appendChild(document.createTextNode("登录失败 请检查账号密码"));
+                    }
                 }
                 return;
             }
